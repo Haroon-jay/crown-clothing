@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import "./shop.scss"
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
 import { Route } from 'react-router-dom'

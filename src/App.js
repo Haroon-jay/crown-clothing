@@ -1,5 +1,5 @@
 import './App.css';
-import React,{useState,useEffect} from "react"
+import React,{useEffect} from "react"
 import {Route,Switch,Redirect} from "react-router-dom"
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from "./pages/shoppage/Shop"
