@@ -28,6 +28,7 @@ const Collection = ({match,collection}) => {
 }
 
 const mapStateToProps=(state,ownProps)=>{
+    
 return{
     collection:selectCollection(ownProps.match.params.collectionId)
     (state)
