@@ -7,6 +7,7 @@ const COLLECTION_ID_MAP={
     men:5,
     women:4
 }
+
 const selectShop=state=>state.shop
 export const selectShopCollections=createSelector(
     [selectShop],shop=>shop.collections

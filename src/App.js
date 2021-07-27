@@ -13,13 +13,13 @@ import CheckoutPage from './pages/checkout/CheckOut';
 import Header from './components/header/Header';
 
 import { auth, createUserProfileDocument } from './firebase/firebase';
-
+import { selectCartState } from './redux/cart/cartSelectors';
 import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelector';
-
+import { toggleCartHidden } from './redux/cart/cartAction';
 class App extends React.Component {
   unsubscribeFromAuth = null;
-
+  
   componentDidMount() {
     const { setCurrentUser } = this.props;
 
@@ -44,8 +44,12 @@ class App extends React.Component {
   }
 
   render() {
+    const{toggleCart}=this.props
+    const {cartState}=this.props
     return (
-      <div>
+      <div onClick={()=>{
+        !cartState && toggleCart()
+      }} >
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -69,11 +73,14 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  cartState:selectCartState
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  toggleCart:()=>dispatch(toggleCartHidden())
+  
 });
 
 export default connect(
