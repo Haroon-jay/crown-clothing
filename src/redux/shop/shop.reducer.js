@@ -1,15 +1,18 @@
-import data from "./shop.data"
+
 const INITIAL_STATE={
-collections:data
+collections:null
 }
  export const shopReducer=(state=INITIAL_STATE,action)=>{
    
     switch(action.type){
-        // case "UPDATE_COLLECTIONS":
-        //     return{
-        //         ...state,collections:action.payload
-        //     }
+        case "UPDATE_COLLECTION":
+            console.log(action.payload,"fggregrgergergegeger")
+            return{
+                ...state,collections:action.payload
+            }
+            
         default:
             return state
     }
+    
 }
