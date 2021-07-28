@@ -1,6 +1,5 @@
 import React from 'react'
 import { HeaderContainer,OptionsDiv,Options,OptionsLink,LogoContainer} from "./Header.styles"
-import { Link } from 'react-router-dom'
 import { auth } from '../../firebase/firebase'
 import { connect } from 'react-redux'
 import { ReactComponent as Logo } from '../../assets/crown.svg'

@@ -1,13 +1,5 @@
 import { createSelector } from "reselect";
 
-const COLLECTION_ID_MAP={
-    hats:1,
-    sneaker:2,
-    jackets:3,
-    men:5,
-    women:4
-}
-
 const selectShop=state=>state.shop
 export const selectShopCollections=createSelector(
     [selectShop],shop=>shop.collections
@@ -19,3 +11,9 @@ export const selectCollection= (collectionUrlParam)=>createSelector(
     
     [selectShopCollections],collections=> collections? collections[collectionUrlParam]
 :null)
+export const selectIsCollectionFetching=createSelector(
+    [selectShop],shop=>shop.isFetching
+)
+export const selectIsCollectionLoading=createSelector(
+    [selectShop],shop=>!!shop.collections
+)
