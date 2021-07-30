@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,14 +12,18 @@ import { checkUserSession } from './redux/user/userActions';
 import { selectCartState } from './redux/cart/cartSelectors';
 import { selectCurrentUser } from './redux/user/userSelector';
 import { toggleCartHidden } from './redux/cart/cartAction';
-class App extends React.Component {
-  unsubscribeFromAuth = null;
-  
-  componentDidMount() {
-   
-    const { checkUserSession } = this.props;
-    console.log("component did mount runs")
+const App=(props)=> {
+  const unsubscribeFromAuth = null;
+  const{toggleCart}=props
+  const {cartState,currentUser}=props
+  useEffect(()=>{
+    const { checkUserSession } = props;
     checkUserSession()
+  },[checkUserSession])
+  // componentDidMount() {
+   
+  //   console.log("component did mount runs")
+  //   checkUserSession()
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
@@ -34,16 +38,13 @@ class App extends React.Component {
 
     //   setCurrentUser(userAuth);
     //});
-  }
+  //}
 
-   componentWillUnmount() {
-     console.log("component will unmount runs")
-   //  this.unsubscribeFromAuth()
-   }
-
-  render() {
-    const{toggleCart}=this.props
-    const {cartState}=this.props
+  //  componentWillUnmount() {
+  //    console.log("component will unmount runs")
+  //  //  this.unsubscribeFromAuth()
+  //  }
+   
     return (
       <div onClick={()=>{
         !cartState  && toggleCart()
@@ -58,7 +59,7 @@ class App extends React.Component {
             exact
             path='/signin'
             render={() =>
-              this.props.currentUser ? (
+              currentUser ? (
                 <Redirect to='/' />
               ) : (
                 <SignInAndSignUpPage />
@@ -70,7 +71,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
