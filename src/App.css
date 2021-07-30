@@ -1,4 +1,8 @@
-body{
+.container{
+  width: 100vw;
+  height: 100vh;
+}
+.app-container{
   font-family: "Open Sans Condensed",sans-serif;
   padding: 20px 60px;
 

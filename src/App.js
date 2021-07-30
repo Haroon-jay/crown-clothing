@@ -2,54 +2,53 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
 import './App.css';
-
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/Shop';
 import SignInAndSignUpPage from './pages/sign-in-sign-up/SignInUp';
 import CheckoutPage from './pages/checkout/CheckOut';
-
 import Header from './components/header/Header';
-
-import { auth, createUserProfileDocument } from './firebase/firebase';
+import { checkUserSession } from './redux/user/userActions';
 import { selectCartState } from './redux/cart/cartSelectors';
-import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelector';
 import { toggleCartHidden } from './redux/cart/cartAction';
 class App extends React.Component {
   unsubscribeFromAuth = null;
   
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+   
+    const { checkUserSession } = this.props;
+    console.log("component did mount runs")
+    checkUserSession()
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    //     userRef.onSnapshot(snapShot => {
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data()
+    //       });
+    //     });
+    //   }
 
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-
-      setCurrentUser(userAuth);
-    });
+    //   setCurrentUser(userAuth);
+    //});
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+   componentWillUnmount() {
+     console.log("component will unmount runs")
+   //  this.unsubscribeFromAuth()
+   }
 
   render() {
     const{toggleCart}=this.props
     const {cartState}=this.props
     return (
       <div onClick={()=>{
-        !cartState && toggleCart()
-      }} >
+        !cartState  && toggleCart()
+      }} className="container">
+      <div className="app-container">
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -68,6 +67,7 @@ class App extends React.Component {
           />
         </Switch>
       </div>
+      </div>
     );
   }
 }
@@ -78,8 +78,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
-  toggleCart:()=>dispatch(toggleCartHidden())
+   
+  toggleCart:()=>dispatch(toggleCartHidden()),
+  checkUserSession:()=>dispatch(checkUserSession())
   
 });
 

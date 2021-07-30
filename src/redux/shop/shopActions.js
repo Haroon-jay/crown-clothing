@@ -20,13 +20,6 @@ export const fetchCollectionsFailure=error=>{
 }
 export const fetchCollectionsStartAsync=()=>{
     return dispatch=>{
-        const collectionRef = fireStore.collection('collections');
-         dispatch(fetchCollectionsStart())
-         collectionRef.get().then(snap=>{
-          const collectionsMap= convertCollectionsSnapshotToMap(snap)
-          dispatch(fetchCollectionsSuccess(collectionsMap))
-         // updateCollections(collectionsMap)
-         
-         }).catch(e=>dispatch(fetchCollectionsFailure(e.message)))
+        
     }
 }
