@@ -24,11 +24,20 @@
       opacity: 0.7;
       position: absolute;
       top: 255px;
-      @media(min-width: 61rem){
-        font-size: 0.85rem;
-       
-      }
    display: none;
+   @media(max-width: 800px){
+   display: block;
+   font-size: 0.81rem;
+   opacity: 0.9;
+   padding: 0 10px 0 10px ;
+   top:240px;
+   width: 200px;
+  }
+  @media screen and(max-width:560px) {
+    top:140px;
+    width: 70px;
+  }
+
     }
     &:hover{
       .image{
@@ -52,10 +61,33 @@
       .name {
         width: 90%;
         margin-bottom: 15px;
+        @media(max-width:800px){
+          margin-bottom: 0;
+        }
       }
   
       .price {
         width: 15%;
+      }
+      @media screen and (max-width:800px) {
+        flex-direction: column;        
+      }
+    }
+    @media screen and (max-width:560px){
+      height: 220px;
+    }
+    @media screen and (max-width:800px) {
+      width: 44vw;
+      
+      margin-bottom: 30px;
+      &:hover{
+        .image{
+          opacity: unset;
+        }
+        .custom-button{
+          opacity: unset;
+          font-size: 0.81rem;
+        }
       }
     }
   }

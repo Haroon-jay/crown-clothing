@@ -25,7 +25,7 @@ const SignIn = (props) => {
              handleChange={e=>setPassword(e.target.value)} />
              <div className="buttons">
               <CustomButton type="submit"> <span style={{fontSize:"0.7rem"}}> Sign In </span></CustomButton>
-              <CustomButton type="button"  isGoogleSignIn={true} onClick={googleSignInStart} > <span style={{fontSize:"0.7rem"}}> Sign In With google</span></CustomButton>
+              <CustomButton type="button"  isGoogleSignIn={true} onClick={googleSignInStart} > <span style={{fontSize:"0.7rem",padding:"0px"}}> Sign In With google</span></CustomButton>
               </div></form>
         </div>
     )

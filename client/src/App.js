@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import './App.css';
+
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shoppage/Shop';
 import SignInAndSignUpPage from './pages/sign-in-sign-up/SignInUp';
@@ -12,6 +12,7 @@ import { checkUserSession } from './redux/user/userActions';
 import { selectCartState } from './redux/cart/cartSelectors';
 import { selectCurrentUser } from './redux/user/userSelector';
 import { toggleCartHidden } from './redux/cart/cartAction';
+import { GlobalStyle } from './global.styles';
 const App=(props)=> {
   const unsubscribeFromAuth = null;
   const{toggleCart}=props
@@ -46,6 +47,8 @@ const App=(props)=> {
   //  }
    
     return (
+      <>
+      <GlobalStyle/>
       <div onClick={()=>{
         !cartState  && toggleCart()
       }} className="container">
@@ -69,6 +72,7 @@ const App=(props)=> {
         </Switch>
       </div>
       </div>
+      </>
     );
   }
 
